@@ -135,7 +135,7 @@
   <h2>Objects</h2>
   <!-- Checkbox list generated dynamically using JavaScript -->
 </div>
-  <button onclick="getSelectedObjects()">Get Selected Objects</button>
+  <button onclick="generateObjectList()">Clear Selections</button>
 
 
 <script>
@@ -172,6 +172,19 @@
       const fileInput = document.getElementById('fileInput');
       const file = fileInput.files[0];
 
+      // Get objects
+      var selectedObjects = [];
+      var checkboxes = document.getElementsByClassName('objectCheckbox');
+      var labels = document.getElementsByClassName('objectLabel');
+
+      for (var i = 0; i < checkboxes.length; i++) {
+        if (!checkboxes[i].checked) {
+          selectedObjects.push(labels[i].innerText);
+        }
+      }
+
+      // Print the selected objects to the console
+      console.log('Selected Objects:', selectedObjects);
       if (!file) {
           alert('Please select an image file.');
           return;
@@ -179,7 +192,7 @@
 
       const formData = new FormData();
       formData.append('image', file);
-
+      formData.append('selectedObjects', JSON.stringify(selectedObjects));
       try {
           const response = await fetch('/detect', {
               method: 'POST',
@@ -230,42 +243,6 @@
   }
   generateObjectList();
 
-
-  function getSelectedObjects() {
-    var selectedObjects = [];
-    var checkboxes = document.getElementsByClassName('objectCheckbox');
-    var labels = document.getElementsByClassName('objectLabel');
-
-    for (var i = 0; i < checkboxes.length; i++) {
-      if (!checkboxes[i].checked) {
-        selectedObjects.push(labels[i].innerText);
-      }
-    }
-
-    // Print the selected objects to the console
-    console.log('Selected Objects:', selectedObjects);
-
-    const payload = {
-        selected_items: selectedObjects
-    };
-
-    fetch('', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data.result);
-        // Handle the response as needed
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        // Handle errors
-    });
-  }
 </script>
 
 </body>

@@ -4,6 +4,7 @@ from io import BytesIO
 from ultralytics import YOLO
 import os
 import shutil
+import json
 
 app = Flask(__name__)
 
@@ -19,6 +20,11 @@ def detect():
     # Get the image file from the request
     file = request.files['image']
 
+    # Get array of objects
+    selected_objects_json = request.form.get('selectedObjects')  # Get the selectedObjects array as JSON string
+    selected_objects = json.loads(selected_objects_json) if selected_objects_json else []
+    selected_numbers = class_processing(selected_objects)
+
     # Read the image file
     image = Image.open(file.stream)
     image_filename = os.path.join(os.getcwd(), "tmp.jpg")
@@ -32,7 +38,7 @@ def detect():
         except OSError as e:
             print(f"Error: {predict_folder_path} : {e.strerror}")
     # Perform object detection
-    results = model.predict(source='tmp.jpg', save=True)
+    results = model.predict(source='tmp.jpg', save=True, classes=selected_numbers)
 
     image_path = os.path.join(predict_folder_path, 'tmp.jpg')
     with open(image_path, 'rb') as f:
@@ -41,5 +47,33 @@ def detect():
     # Return the image data for display in the frontend
     return image_data
 
+
+def class_processing(selected_objects):
+    classes = {
+        "person": 0,
+        "bicycle": 1,
+        "car": 2,
+        "motorcycle": 3,
+        "bus": 5,
+        "train": 6,
+        "truck": 7,
+        "boat": 8,
+        "traffic light": 9,
+        "cat": 15,
+        "fire hydrant": 10,
+        "stop sign": 11,
+        "parking meter": 12,
+        "bench": 13,
+        "bird": 14
+    }
+
+    selected_numbers = []
+    for thing in selected_objects:
+        selected_numbers.append(int(classes[thing]))
+
+    if not selected_numbers:
+        selected_numbers = list(classes.values())
+
+    return selected_numbers
 if __name__ == '__main__':
     app.run(debug=True)
