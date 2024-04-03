@@ -76,4 +76,4 @@ def class_processing(selected_objects):
 
     return selected_numbers
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000)
