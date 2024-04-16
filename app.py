@@ -1,6 +1,5 @@
 from flask import Flask, request, render_template, jsonify
 from PIL import Image
-from io import BytesIO
 from ultralytics import YOLO
 import os
 import shutil

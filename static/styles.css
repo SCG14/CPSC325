@@ -1,0 +1,150 @@
+/* Preserve existing font family for body */
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 20px;
+  background-color: #dbe7ea; /* Serene coastline background color */
+}
+
+/* Update h1 styles */
+h1 {
+  text-align: center;
+  color: #1e7a8a; /* Serene coastline title color */
+  font-size: 36px; /* Increased title font size */
+}
+
+/* Update buttonContainer styles */
+.buttonContainer {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Hide file input */
+input[type="file"] {
+  display: none;
+}
+
+/* Update label and button styles */
+label,
+button {
+  cursor: pointer;
+  padding: 15px 25px; /* Increased padding for larger buttons */
+  border-radius: 8px; /* Increased border radius for better appearance */
+  transition: background-color 0.3s, box-shadow 0.3s; /* Added box shadow transition */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Added box shadow */
+  font-family: 'Roboto', sans-serif; /* Apply existing font */
+}
+
+/* Update label styles */
+label {
+  background-color: #4CAF50; /* Notable shade for choose file button */
+  color: #fff;
+  border: none;
+  margin-right: 10px;
+}
+
+label:hover {
+  background-color: #45a049; /* Darker shade on hover */
+}
+
+/* Update button styles */
+button {
+  background-color: #007bff; /* Notable shade for other buttons */
+  border: none;
+  color: #fff;
+  margin-right: 10px;
+}
+
+button:hover {
+  background-color: #0056b3; /* Darker shade on hover */
+}
+
+/* Update imageContainer styles */
+#imageContainer {
+  margin-top: 20px;
+  max-width: 1000px;
+  border: 2px solid #96c1cf; /* Serene coastline border color */
+  overflow: hidden;
+  margin: 20px auto;
+  background-color: #f4f9fa; /* Serene coastline container background color */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  object-fit: cover;
+}
+
+/* Preserve existing styles for imageBox */
+#imageBox {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Preserve existing styles for fileName */
+#fileName {
+  text-align: center;
+  margin-top: 10px;
+  color: #555;
+}
+
+/* Update objectListContainer styles */
+#objectListContainer {
+  max-width: 300px; /* Increased max-width for bigger objects */
+  margin: auto;
+  padding: 20px; /* Increased padding for larger objects */
+  border: 2px solid #96c1cf; /* Serene coastline border color */
+  background-color: #f4f9fa; /* Serene coastline container background color */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+/* Update objectListContainer h2 styles */
+#objectListContainer h2 {
+  text-align: center;
+  color: #1e7a8a; /* Serene coastline title color */
+}
+
+/* Preserve existing styles for objectLabel */
+.objectLabel {
+  display: block;
+  margin-bottom: 10px; /* Increased margin for better spacing */
+  cursor: pointer;
+  padding: 15px; /* Increased padding for larger objects */
+  border-radius: 8px; /* Increased border radius for better appearance */
+  transition: background-color 0.3s;
+}
+
+/* Preserve existing styles for objectCheckbox */
+.objectCheckbox {
+  display: none;
+}
+
+/* Preserve existing styles for objectCheckbox:checked + .objectLabel */
+.objectCheckbox:checked + .objectLabel {
+  background-color: #f10404;
+}
+
+/* Update clearButton styles */
+.clearButton {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px; /* Increased margin for better separation */
+}
+
+/* Update clearButton button styles */
+.clearButton button {
+  background-color: #dc3545;
+  border-radius: 8px;
+  padding: 15px 25px; /* Increased padding for larger button */
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s; /* Added box shadow transition */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Added box shadow */
+}
+
+.clearButton button:hover {
+  background-color: #bd2130;
+}
