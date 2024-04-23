@@ -11,22 +11,29 @@
 <h1>Image Analyzer</h1>
 
 <div class="buttonContainer">
-  <label for="fileInput" style="margin-right: 30px;">Choose File</label>
+  <label for="fileInput">Choose File</label>
   <input type="file" id="fileInput" />
-  <button onclick="displayImage()" style="margin-right: 30px;">Display</button>
+  <button onclick="displayImage()">Display</button>
+  <button id="displayResultsButton">Display Results</button>
   <button id="detectButton">Analyze</button>
 </div>
 
-<div id="imageContainer">
-  <div id="imageBox"></div>
-  <div id="fileName"></div>
+<div class="mainContainer">
+  <div class="imageAndObjectContainer">
+    <div id="imageContainer">
+      <div id="imageBox"></div>
+      <div id="fileName"></div>
+    </div>
+
+    <div class="objectListContainer" id="objectListContainer"> <!-- Added class -->
+      <h2>Objects</h2>
+      <button onclick="generateObjectList()">Clear Selections</button>
+    </div>
+  </div>
+  <div id="resultsTableContainer"></div>
 </div>
 
-<div id="objectListContainer">
-  <h2>Objects</h2>
 
-</div>
-<button onclick="generateObjectList()">Clear Selections</button>
 
 <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>

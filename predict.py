@@ -8,4 +8,4 @@ model = YOLO("yolov8n.pt")
 # from PIL
 im1 = Image.open("../../yoloTest/tmp.jpg")
 
-results = model.predict(source=im1, save=True, classes=[9])  # save plotted images
+results = model.predict(source=im1, save=True, classes=[9], save_txt=True)  # save plotted images

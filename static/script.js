@@ -93,6 +93,63 @@ document.getElementById('detectButton').addEventListener('click', async () => {
         alert('An error occurred while detecting objects.');
     }
 });
+// Function to display the results in a table
+// Function to display the results in a table
+function displayResults(resultsData) {
+  var tableContainer = document.getElementById('resultsTableContainer');
+  tableContainer.innerHTML = ''; // Clear previous content
+
+  var table = document.createElement('table');
+  var thead = document.createElement('thead');
+  var tbody = document.createElement('tbody');
+
+  // Create table headers
+  var headerRow = document.createElement('tr');
+  var headers = ['Object', 'X Center', 'Y Center', 'Confidence'];
+  headers.forEach(function(headerText) {
+    var headerCell = document.createElement('th');
+    headerCell.textContent = headerText;
+    headerRow.appendChild(headerCell);
+  });
+  thead.appendChild(headerRow);
+
+  // Loop through the results data and create table rows
+  resultsData.forEach(function(rowData) {
+    var row = document.createElement('tr');
+
+    // Remove the fourth column of data
+    rowData.splice(3, 1);
+
+    rowData.forEach(function(cellData) {
+      var cell = document.createElement('td');
+      cell.textContent = cellData;
+      row.appendChild(cell);
+    });
+    tbody.appendChild(row);
+  });
+
+  table.appendChild(thead);
+  table.appendChild(tbody);
+  tableContainer.appendChild(table);
+}
+
+
+document.getElementById('displayResultsButton').addEventListener('click', async () => {
+  try {
+      const response = await fetch('/display_stats', {
+            method: 'POST'
+        });
+      console.log(response)
+    // Assuming this is the endpoint that returns the text file data
+    const textData = await response.text();
+    const rows = textData.trim().split('\n'); // Split the text data into rows
+    const resultsData = rows.map(row => row.split(' ')); // Split each row into cells
+    displayResults(resultsData);
+  } catch (error) {
+    console.error(error);
+    alert('An error occurred while fetching results.');
+  }
+});
 
 
 // Function to dynamically generate checkbox list

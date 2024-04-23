@@ -14,6 +14,44 @@ model = YOLO("yolov8n.pt")
 def index():
     return render_template('frontend.html')
 
+@app.route('/display_stats', methods=['POST'])
+def display_stats():
+    classes = {
+        "person": 0,
+        "bicycle": 1,
+        "car": 2,
+        "motorcycle": 3,
+        "bus": 5,
+        "train": 6,
+        "truck": 7,
+        "boat": 8,
+        "traffic_light": 9,
+        "cat": 15,
+        "fire hydrant": 10,
+        "stop_sign": 11,
+        "parking_meter": 12,
+        "bench": 13,
+        "bird": 14
+    }
+    stats_folder_path = os.path.join(os.path.dirname(__file__), 'runs', 'detect', 'predict', 'labels')
+    tmp_file_path = os.path.join(stats_folder_path, 'tmp.txt')
+
+    # Read the contents of the file
+    with open(tmp_file_path, 'r') as file:
+        lines = file.readlines()
+
+    # Replace numerical data with class names
+    for i, line in enumerate(lines):
+        line_parts = line.strip().split()
+        if line_parts:  # Skip empty lines
+            class_name = next(key for key, value in classes.items() if value == int(line_parts[0]))
+            lines[i] = class_name + ' ' + ' '.join(line_parts[1:]) + '\n'
+
+    # Join the modified lines
+    modified_stats_data = ''.join(lines)
+
+    return modified_stats_data
+
 @app.route('/detect', methods=['POST'])
 def detect():
     # Get the image file from the request
@@ -35,9 +73,9 @@ def detect():
             shutil.rmtree(predict_folder_path)
             print("Successfully deleted the 'predict' folder.")
         except OSError as e:
-            print(f"Error: {predict_folder_path} : {e.strerror}")
+            print(f"Error: {predict_folder_path} : {e.strerroSr}")
     # Perform object detection
-    results = model.predict(source='tmp.jpg', save=True, classes=selected_numbers)
+    results = model.predict(source='tmp.jpg', save=True, classes=selected_numbers, save_txt=True, show_labels=False)
 
     image_path = os.path.join(predict_folder_path, 'tmp.jpg')
     with open(image_path, 'rb') as f:
@@ -65,7 +103,6 @@ def class_processing(selected_objects):
         "bench": 13,
         "bird": 14
     }
-
     selected_numbers = []
     for thing in selected_objects:
         selected_numbers.append(int(classes[thing]))
@@ -74,5 +111,7 @@ def class_processing(selected_objects):
         selected_numbers = list(classes.values())
 
     return selected_numbers
+
+
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5000)

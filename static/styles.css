@@ -3,29 +3,24 @@ body {
   font-family: 'Roboto', sans-serif;
   margin: 20px;
   background-color: #dbe7ea; /* Serene coastline background color */
+  background: linear-gradient(to right, #3498db, #1abc9c);
 }
 
-/* Update h1 styles */
 h1 {
   text-align: center;
-  color: #1e7a8a; /* Serene coastline title color */
-  font-size: 36px; /* Increased title font size */
+  color: #2c3e50; /* Deep blue */
+  font-size: 100px; /* Increased title font size */
+  font-weight: bold; /* Bold font weight */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Text shadow */
+   /* Gradient background */
 }
 
-/* Update buttonContainer styles */
-.buttonContainer {
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
 /* Hide file input */
 input[type="file"] {
   display: none;
 }
 
-/* Update label and button styles */
 label,
 button {
   cursor: pointer;
@@ -87,23 +82,39 @@ button:hover {
   color: #555;
 }
 
-/* Update objectListContainer styles */
-#objectListContainer {
-  max-width: 300px; /* Increased max-width for bigger objects */
-  margin: auto;
-  padding: 20px; /* Increased padding for larger objects */
-  border: 2px solid #96c1cf; /* Serene coastline border color */
-  background-color: #f4f9fa; /* Serene coastline container background color */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  position: absolute;
-  top: 20px;
-  right: 20px;
+.mainContainer {
+  display: flex;
 }
 
-/* Update objectListContainer h2 styles */
-#objectListContainer h2 {
-  text-align: center;
-  color: #1e7a8a; /* Serene coastline title color */
+.imageAndObjectContainer {
+  display: flex;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.objectListContainer {
+  flex: 1; /* Occupy remaining space */
+}
+#imageContainer {
+  margin-top: 20px;
+  max-width: 1000px;
+  border: 2px solid #96c1cf;
+  overflow: hidden;
+  background-color: #f4f9fa;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#objectListContainer {
+  max-width: 250px;
+  padding: 20px;
+  background-color: transparent;
+}
+
+button {
+  margin-top: 20px;
 }
 
 /* Preserve existing styles for objectLabel */
@@ -147,4 +158,34 @@ button:hover {
 
 .clearButton button:hover {
   background-color: #bd2130;
+}
+
+/* Added styles for results table */
+#resultsTableContainer {
+  margin-top: 20px;
+  max-width: 1000px;
+  overflow-x: auto;
+}
+
+#resultsTableContainer table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#resultsTableContainer th, #resultsTableContainer td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+#resultsTableContainer th {
+  background-color: #f2f2f2;
+}
+
+#resultsTableContainer tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#resultsTableContainer tr:hover {
+  background-color: #ddd;
 }
